@@ -1,2 +1,2 @@
-# RubiksCUbe
+# RubiksCube
 Rubiks Cube
