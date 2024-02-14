@@ -1,5 +1,8 @@
 import math
 
+a=250
+b=100
+
 def transpose_matrix(matrix : list):
     transposed_matrix = [list(row) for row in zip(*matrix)]
     return transposed_matrix
