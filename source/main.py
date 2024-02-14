@@ -47,7 +47,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for button in buttons.buttons:
                 if button[0].collidepoint(event.pos):
-                    pygame.quit()
+                    button[3](cube)
 
     
 
