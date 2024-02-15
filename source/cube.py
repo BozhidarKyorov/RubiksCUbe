@@ -1,4 +1,5 @@
 from helpers import *
+from random import randint
 """
     test_function does blah blah blah.
 
@@ -198,7 +199,31 @@ class Cube:
         self.rotate_side_back_left_clockwise()
         self.rotate_side_back_left_clockwise()
 
+    def shuffle(self):
+        for _ in range(0,20):
+            match (randint(1,18)):
+                case 1: self.rotate_side_up_counterclockwise()
+                case 2: self.rotate_side_up_clockwise()
+                case 3: self.rotate_side_middle_counterclockwise()
+                case 4: self.rotate_side_middle_clockwise()
+                case 5: self.rotate_side_down_counterclockwise()
+                case 6: self.rotate_side_down_clockwise()
+                case 7: self.rotate_side_left_counterclockwise()
+                case 8: self.rotate_side_left_clockwise()
+                case 9: self.rotate_side_middle_right_counterclockwise()
+                case 10: self.rotate_side_middle_right_clockwise()
+                case 11: self.rotate_side_back_right_counterclockwise()
+                case 12: self.rotate_side_back_right_clockwise()
+                case 13: self.rotate_side_right_counterclockwise()
+                case 14: self.rotate_side_right_clockwise()
+                case 15: self.rotate_side_middle_left_counterclockwise()
+                case 16: self.rotate_side_middle_left_clockwise()
+                case 17: self.rotate_side_back_left_counterclockwise()
+                case 18: self.rotate_side_back_left_clockwise()
+                case _: self.rotate_cube_left_to_right()
 
+
+"""
 cube = Cube()
 cube.up = [[str(matrix[j][i]) for i in range(0, 3)] for j in range(0, 3)]
 cube.down = [[str(matrix[j][i]) for i in range(0, 3)] for j in range(0, 3)]
@@ -220,3 +245,4 @@ print(cube.is_solved())
 cube.rotate_cube_up_to_left()
 cube.print_cube()
 print(cube.is_solved())
+"""

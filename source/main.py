@@ -30,8 +30,7 @@ angle = 0
 a = 250
 b = 100
 cube = cube.Cube()
-cube.rotate_side_up_clockwise()
-cube.rotate_side_left_counterclockwise()
+cube.shuffle()
 
 while True:
     screen.blit(background_surface,(0, 0))
@@ -59,6 +58,8 @@ while True:
     for button in buttons.buttons:
         if button[0].collidepoint(MOUSE_POS):
             button[1](screen,button[2], 'white')
+
+
 
     #draw_functions.draw_up(screen)
     #draw_functions.draw_left(screen)
