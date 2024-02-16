@@ -38,6 +38,70 @@ def color_cube(screen, cube):
     color_right_side(screen,cube,[0,1,2], [0,1,2])
     color_up_side(screen,cube,[0,1,2], [0,1,2])
 
+
+def draw_rotate_button_left(screen, cords, color = 'grey'):
+    color_polygon(screen, color,
+                  ((cords[0] - 120, cords[1]), 
+                   (cords[0] - 100, cords[1] - 40), 
+                   (cords[0] - 100, cords[1] + 40)))
+    
+    color_polygon(screen, 'black',
+                  ((cords[0] - 120, cords[1]), 
+                   (cords[0] - 100, cords[1] - 40), 
+                   (cords[0] - 100, cords[1] + 40)), 2)
+
+def draw_rotate_button_right(screen, cords, color = 'grey'):
+    color_polygon(screen, color, 
+                  ((cords[0] + 120, cords[1]),
+                   (cords[0] + 100, cords[1] + 40),
+                   (cords[0] + 100, cords[1] - 40)))
+    
+    color_polygon(screen, 'black', 
+                  ((cords[0] + 120, cords[1]),
+                   (cords[0] + 100, cords[1] + 40),
+                   (cords[0] + 100, cords[1] - 40)), 2)
+
+def draw_rotate_button_down_left(screen, cords, color = 'grey'):
+    color_polygon(screen, color, 
+                  ((cords[0] - (120*b)/(math.sqrt(a*a + b/b)), cords[1] + (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (100*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (100*a + 40*b)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b + 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (120*b + 40*a)/(math.sqrt(a*a + b/b)))))
+    color_polygon(screen, 'black', 
+                  ((cords[0] - (120*b)/(math.sqrt(a*a + b/b)), cords[1] + (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (100*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (100*a + 40*b)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b + 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (120*b + 40*a)/(math.sqrt(a*a + b/b)))), 2)
+
+def draw_rotate_button_up_right(screen, cords, color = 'grey'):
+    color_polygon(screen, color, 
+                  ((cords[0] + (120*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] - (100*a + 40*b)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (100*a - 40*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*b + 40*a)/(math.sqrt(a*a + b/b)))))
+    color_polygon(screen, 'black', 
+                  ((cords[0] + (120*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] - (100*a + 40*b)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (100*a - 40*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*b + 40*a)/(math.sqrt(a*a + b/b)))), 2)
+
+def draw_rotate_button_up_left(screen, cords, color = 'grey'):
+    color_polygon(screen, color, 
+                  ((cords[0] - (120*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (100*a - 40*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*b + 40*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] - (100*a + 40*b)/(math.sqrt(a*a + b/b)))))
+    color_polygon(screen, 'black', 
+                  ((cords[0] - (120*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (100*a - 40*b)/(math.sqrt(a*a + b/b)), cords[1] - (120*b + 40*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] - (100*a + 40*b)/(math.sqrt(a*a + b/b)))), 2)
+
+def draw_rotate_button_down_right(screen, cords, color = 'grey'):
+    color_polygon(screen, color, 
+                  ((cords[0] + (120*b)/(math.sqrt(a*a + b/b)), cords[1] + (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (100*b + 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (120*b + 40*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (100*a + 40*b)/(math.sqrt(a*a + b/b)))))
+    color_polygon(screen, 'black', 
+                  ((cords[0] + (120*b)/(math.sqrt(a*a + b/b)), cords[1] + (120*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] + (100*b + 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (120*b + 40*a)/(math.sqrt(a*a + b/b))),
+                   (cords[0] - (120*b - 40*a)/(math.sqrt(a*a + b/b)), cords[1] + (100*a + 40*b)/(math.sqrt(a*a + b/b)))), 2)
+
+
 def draw_button_left(screen, cords, color = 'grey'):
     color_polygon(screen, color, 
                   ((cords[0] - 40, cords[1]),

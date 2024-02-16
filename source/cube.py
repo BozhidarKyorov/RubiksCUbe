@@ -68,10 +68,14 @@ class Cube:
 
     def rotate_cube_left_to_right(self):
         """Rotates the cube so the left face faces right"""
+        self.up = face_rotate_counterclockwise(self.up)
+        self.down = face_rotate_counterclockwise(self.down)
         self.left, self.right, self.back_right, self.back_left = self.back_left, self.left, self.right, self.back_right
 
     def rotate_cube_right_to_left(self):
         """Rotates the cube so the right face faces left"""
+        self.up = face_rotate_clockwise(self.up)
+        self.down = face_rotate_clockwise(self.down)
         self.left, self.right, self.back_right, self.back_left = self.right, self.back_right, self.back_left, self.left
 
     def is_solved(self):
