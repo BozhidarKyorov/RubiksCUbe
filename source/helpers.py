@@ -3,6 +3,26 @@ import math
 a=250
 b=100
 
+def randomassformula(angle):
+    return angle
+
+def calculate_elipse_cords(angle):
+
+    if(angle<=math.pi/2):
+        x=calculate_x_ellipse(a,b,angle)
+        y=calculate_y_ellipse(a,b,angle)
+    elif(angle<=math.pi):
+        x=-calculate_x_ellipse(a,b,angle)
+        y=calculate_y_ellipse(a,b,angle)
+    elif(angle<=math.pi*3/2):
+        x=-calculate_x_ellipse(a,b,angle)
+        y=-calculate_y_ellipse(a,b,angle)
+    else:
+        x=calculate_x_ellipse(a,b,angle)
+        y=-calculate_y_ellipse(a,b,angle)
+    return [x,y]
+    
+
 def transpose_matrix(matrix : list):
     transposed_matrix = [list(row) for row in zip(*matrix)]
     return transposed_matrix

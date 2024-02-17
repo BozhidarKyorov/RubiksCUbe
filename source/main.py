@@ -13,8 +13,6 @@ screen = pygame.display.set_mode((1600, 900))
 pygame.display.set_caption("Rubik's Cube")
 clock = pygame.time.Clock()
 
-#test_surface = pygame.Surface((300, b))
-#test_surface.fill('red')
 button_font = pygame.font.SysFont('Helvetica', 35)
 tutorial_font = pygame.font.SysFont('Helvetica', 25)
 
@@ -33,6 +31,8 @@ cube = cube.Cube()
 shuffled = False
 turns = 0
 toggle_tutorial = False
+angle = 0
+rotating = False
 
 
 
@@ -216,7 +216,82 @@ def victory_screen():
         pygame.display.update()
         clock.tick(60)
     
+def test_screen():
+    angle = 0 
+    rotating = False
+    
+    while True:
+        if(angle >= 90):
+            rotating = False
+            angle = 0
 
+        screen.blit(background_surface, (0, 0))
+        screen.blit(button_font.render('TEST', 1, 'black'), (800, 100))
+        
+        left_menu()
+        right_menu()
+
+        test_button = pygame.draw.rect(screen, 'grey', pygame.Rect(400, 300, 100, 50))
+
+        if rotating:
+                rotate_functions.rf_rotate_side_up_clockwise(cube, screen, angle)
+        else:
+            draw_functions.color_cube(screen, cube)
+            draw_functions.draw_cube_edges(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if test_button.collidepoint(event.pos):
+                    rotating = True
+                    angle = 0
+
+
+        
+
+        #draw_functions.color_cube(screen, cube)
+        #draw_functions.draw_cube_edges(screen)
+
+        
+
+        #if angle == 90:
+        #    angle += 10
+        #else:
+        #   angle += (1 - math.log(abs(90-angle)/90, 1.5))/2
+        angle += 1
+        #print(angle)
+        #print(randomassformula(angle))
+
+
+        #draw_functions.draw_up(screen)
+        #draw_functions.draw_left(screen)
+        #draw_functions.draw_right(screen)
+        #draw_functions.draw_ver(screen)
+        #pygame.draw.ellipse(screen, 'white', (550,200,500,200), 3)
+
+        
+        """if(angle<=math.pi/2):
+            x=calculate_x_ellipse(a,b,angle)
+            y=calculate_y_ellipse(a,b,angle)
+        elif(angle<=math.pi):
+            x=-calculate_x_ellipse(a,b,angle)
+            y=calculate_y_ellipse(a,b,angle)
+        elif(angle<=math.pi*3/2):
+            x=-calculate_x_ellipse(a,b,angle)
+            y=-calculate_y_ellipse(a,b,angle)
+        else:
+            x=calculate_x_ellipse(a,b,angle)
+            y=-calculate_y_ellipse(a,b,angle)
+        pygame.draw.line(screen, 'red', (x+800,y+300),(0,200),3)
+        angle += math.pi/360
+        if(angle>=2*math.pi):
+            angle-=2*math.pi
+        """
+        pygame.display.update()
+        clock.tick(60)
 
     
 def show_tutorial():

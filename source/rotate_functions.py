@@ -1,7 +1,9 @@
 from draw_functions import *
+import pygame
+from helpers import calculate_elipse_cords, randomassformula
 
 
-def rf_rotate_side_up_clockwise(cube, screen):
+def rf_rotate_side_up_clockwise(cube, screen, angle):
     draw_left(screen)
     draw_right(screen)
     ver_2(screen)
@@ -18,6 +20,34 @@ def rf_rotate_side_up_clockwise(cube, screen):
     ver_18(screen)
     ver_20(screen)
     ver_21(screen)
+
+
+
+    cords_top1 = [x + y for x, y in zip(calculate_elipse_cords(randomassformula(angle)/180 * math.pi), [800, 300])]
+    cords_top2 = [x + y for x, y in zip(calculate_elipse_cords((randomassformula(angle + 90)/180) * math.pi), [800, 300])]
+    cords_top3 = [x + y for x, y in zip(calculate_elipse_cords((randomassformula(angle + 180)/180) * math.pi), [800, 300])]
+    cords_top4 = [x + y for x, y in zip(calculate_elipse_cords((randomassformula(angle + 270)/180) * math.pi), [800, 300])]
+    pygame.draw.line(screen, 'red', (cords_top1[0], cords_top1[1]), (cords_top2[0], cords_top2[1]), 3)
+    pygame.draw.line(screen, 'red', (cords_top2[0], cords_top2[1]), (cords_top3[0], cords_top3[1]), 3)
+    pygame.draw.line(screen, 'red', (cords_top3[0], cords_top3[1]), (cords_top4[0], cords_top4[1]), 3)
+    pygame.draw.line(screen, 'red', (cords_top4[0], cords_top4[1]), (cords_top1[0], cords_top1[1]), 3)
+
+    pygame.draw.line(screen, 'red', (cords_top2[0] + (cords_top1[0] - cords_top2[0])*(1/3), cords_top2[1] + (cords_top1[1] - cords_top2[1])*(1/3)), 
+                                    (cords_top3[0] - (cords_top3[0] - cords_top4[0])*(1/3), cords_top3[1] - (cords_top3[1] - cords_top4[1])*(1/3)), 3)
+    pygame.draw.line(screen, 'red', (cords_top2[0] + (cords_top1[0] - cords_top2[0])*(2/3), cords_top2[1] + (cords_top1[1] - cords_top2[1])*(2/3)), 
+                                    (cords_top3[0] - (cords_top3[0] - cords_top4[0])*(2/3), cords_top3[1] - (cords_top3[1] - cords_top4[1])*(2/3)), 3)
+    
+    pygame.draw.line(screen, 'red', (cords_top4[0] + (cords_top1[0] - cords_top4[0])*(1/3), cords_top4[1] + (cords_top1[1] - cords_top4[1])*(1/3)), 
+                                    (cords_top3[0] - (cords_top3[0] - cords_top2[0])*(1/3), cords_top3[1] - (cords_top3[1] - cords_top2[1])*(1/3)), 3)
+    pygame.draw.line(screen, 'red', (cords_top4[0] + (cords_top1[0] - cords_top4[0])*(2/3), cords_top4[1] + (cords_top1[1] - cords_top4[1])*(2/3)), 
+                                    (cords_top3[0] - (cords_top3[0] - cords_top2[0])*(2/3), cords_top3[1] - (cords_top3[1] - cords_top2[1])*(2/3)), 3)
+
+    pygame.display.update()
+
+
+
+
+
 
 def rf_rotate_side_up_counterclockwise(cube, screen):
     draw_left(screen)

@@ -1,6 +1,6 @@
 print("Весели празници")
 """
--time spent : 13.5 h
+-time spent : 16 h
 -time spent learning pygame: 2.5 h
 [Title/Звание]
 Rubik's Cube
