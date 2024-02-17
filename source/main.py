@@ -16,17 +16,23 @@ clock = pygame.time.Clock()
 #test_surface = pygame.Surface((300, b))
 #test_surface.fill('red')
 button_font = pygame.font.SysFont('Helvetica', 35)
+tutorial_font = pygame.font.SysFont('Helvetica', 25)
 
-background_surface = pygame.transform.scale(pygame.image.load('images/background.jpg'), screen.get_size())
+background_surface = pygame.transform.smoothscale(pygame.image.load('images/background.jpg'), screen.get_size())
 cube_image = pygame.transform.smoothscale(pygame.image.load('images/cube.png'), (600, 600))
 logo_image = pygame.transform.smoothscale(pygame.image.load('images/logo.png'), (500, 191))
 button_image = pygame.transform.smoothscale(pygame.image.load('images/button.png'), (300, 100))
 menu_image = pygame.transform.scale(pygame.image.load('images/background2.png'), screen.get_size())
 menu_surface = pygame.Surface((350, 900))
 menu_surface.blit(menu_image, (0,0))
+text_bubble = pygame.transform.smoothscale(pygame.image.load('images/text_bubble.png'), (230, 65))
 
 
 cube = cube.Cube()
+
+shuffled = False
+turns = 0
+toggle_tutorial = False
 
 
 
@@ -57,22 +63,32 @@ def starting_screen():
                 if start_button.collidepoint(event.pos):
                     main()
                 if tutorial_button.collidepoint(event.pos):
-                    show_tutorial()
+                    global toggle_tutorial
+                    toggle_tutorial = True
+                    main()
                 if close_button.collidepoint(event.pos):
                     pygame.quit()
                     exit()  
-
 
         pygame.display.update()
         clock.tick(60)
 
 def main():
+    global shuffled, turns, toggle_tutorial
     while True:
         screen.blit(background_surface, (0, 0))
         
         left_menu_buttons = left_menu()
         right_menu()
-        #screen.blit(menu_surface, (1250, 0))
+
+        draw_functions.color_cube(screen, cube)
+        draw_functions.draw_cube_edges(screen)
+
+        buttons.draw_buttons(screen)
+
+        if toggle_tutorial:
+            show_tutorial()
+
 
         MOUSE_POS = pygame.mouse.get_pos()
 
@@ -80,28 +96,42 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            
             if event.type == pygame.MOUSEBUTTONDOWN:   
                 for button in buttons.rotate_side_buttons + buttons.rotate_cube_buttons:
                     if button[0].collidepoint(event.pos):
-                        button[3](cube)
+                        if pygame.mouse.get_pressed()[0]:
+                            button[3](cube)
+                            turns += 1
+                            if turns >= 10:
+                                shuffled = True
+                        elif pygame.mouse.get_pressed()[2]:
+                            button[3](cube)
+                            button[3](cube)
+                            button[3](cube)
+                            turns += 1
+                            if turns >= 10:
+                                shuffled = True
+
                 
                                       
                 if left_menu_buttons[0].collidepoint(event.pos):
                     starting_screen()
                 if left_menu_buttons[1].collidepoint(event.pos):
-                    show_tutorial()
+                    toggle_tutorial = not toggle_tutorial
                 if left_menu_buttons[2].collidepoint(event.pos):
                     cube.shuffle()
+                    shuffled = True
                 if left_menu_buttons[3].collidepoint(event.pos):
                     pygame.quit()
                     exit()
 
-        
+        if cube.is_solved() and shuffled:
+            victory_screen()
+            shuffled = False
+            turns = 0
 
-        draw_functions.color_cube(screen, cube)
-        draw_functions.draw_cube_edges(screen)
 
-        buttons.draw_buttons(screen)
 
 
         for button in buttons.rotate_side_buttons + buttons.rotate_cube_buttons:
@@ -161,14 +191,56 @@ def left_menu():
 def right_menu():
     screen.blit(menu_surface, (1250, 0))
     
+def victory_screen():
+    while True:
+        screen.blit(background_surface,(0, 0))
+        left_menu_buttons = left_menu()
+        right_menu()
+        screen.blit(button_font.render('Back', 1, 'grey'), (128, 225))
+        screen.blit(button_font.render('Tutorial', 1, 'grey'), (112, 375))
+        screen.blit(button_font.render('Shuffle', 1, 'grey'), (114, 525))
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN: 
+                if left_menu_buttons[3].collidepoint(event.pos):
+                    pygame.quit()
+                    exit()
+                
+       
+        screen.blit(button_font.render('Vicotry', 1, 'black'), (1110, 375))
+
+        pygame.display.update()
+        clock.tick(60)
     
 
 
     
 def show_tutorial():
-    pygame.quit()
-    exit()
+    screen.blit(text_bubble, (1172, 435))
+    screen.blit(tutorial_font.render('Rotates cube', 1, 'black'), (1232, 452))
+
+    screen.blit(pygame.transform.flip(text_bubble, 0, 1), (1027, 190))
+    screen.blit(tutorial_font.render('Rotates side', 1, 'black'), (1087, 207))
+
+    screen.blit(pygame.transform.flip(text_bubble, 0, 1), (280, 180))
+    screen.blit(tutorial_font.render('Back to start', 1, 'black'), (340, 195))
+
+    screen.blit(pygame.transform.flip(text_bubble, 0, 1), (280, 330))
+    screen.blit(tutorial_font.render('Show tutorial', 1, 'black'), (340, 345))
+
+    screen.blit(text_bubble, (280, 540))
+    screen.blit(tutorial_font.render('Shuffle cube', 1, 'black'), (340, 555))
+
+    screen.blit(text_bubble, (280, 690))
+    screen.blit(tutorial_font.render('Closes game', 1, 'black'), (340, 705))
 
 
-main()
+
+
+
+
+starting_screen()
