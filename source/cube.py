@@ -31,21 +31,15 @@ class Cube:
 
     def rotate_cube_left_to_up(self):
         """"Rotates the cube so the left face faces up"""
-        self.up, self.back_right, self.down, self.left = self.left, self.up, self.back_right, self.down
-        self.up = helpers.face_rotate_clockwise(self.up)
-        self.back_right = helpers.face_rotate_clockwise(self.back_right)
-        self.right = helpers.face_rotate_clockwise(self.right)
-        self.back_left = helpers.face_rotate_counterclockwise(self.back_left)
-        self.left = helpers.face_rotate_counterclockwise(self.left)
-        self.down = helpers.face_rotate_counterclockwise(self.down)
+        self.rotate_side_right_clockwise()
+        self.rotate_side_middle_left_clockwise()
+        self.rotate_side_back_left_clockwise()
 
     def rotate_cube_right_to_up(self):
         """Rotates the cube so the right face faces up"""
-        self.up, self.back_left, self.down, self.right = self.right, self.up, self.back_left, self.down
-        self.back_right = helpers.face_rotate_clockwise(self.back_right)
-        self.right = helpers.face_rotate_clockwise(helpers.face_rotate_clockwise(self.right))
-        self.back_left = helpers.face_rotate_counterclockwise(helpers.face_rotate_counterclockwise(self.back_left))
-        self.left = helpers.face_rotate_counterclockwise(self.left)
+        self.rotate_side_left_counterclockwise()
+        self.rotate_side_middle_right_counterclockwise()
+        self.rotate_side_back_left_counterclockwise()
 
     def rotate_cube_up_to_left(self):
         """Rotates the cube so the up face faces left"""
@@ -61,15 +55,15 @@ class Cube:
 
     def rotate_cube_left_to_right(self):
         """Rotates the cube so the left face faces right"""
-        self.up = helpers.face_rotate_counterclockwise(self.up)
-        self.down = helpers.face_rotate_counterclockwise(self.down)
-        self.left, self.right, self.back_right, self.back_left = self.back_left, self.left, self.right, self.back_right
+        self.rotate_side_up_counterclockwise()
+        self.rotate_side_middle_counterclockwise()
+        self.rotate_side_down_counterclockwise()
 
     def rotate_cube_right_to_left(self):
         """Rotates the cube so the right face faces left"""
-        self.up = helpers.face_rotate_clockwise(self.up)
-        self.down = helpers.face_rotate_clockwise(self.down)
-        self.left, self.right, self.back_right, self.back_left = self.right, self.back_right, self.back_left, self.left
+        self.rotate_side_up_clockwise()
+        self.rotate_side_middle_clockwise()
+        self.rotate_side_down_clockwise()
 
     def is_solved(self):
         """Check if the cube is solved"""
@@ -238,3 +232,42 @@ class Cube:
                 case 18: self.rotate_side_back_left_clockwise()
                 case _: self.rotate_cube_left_to_right()
 
+matrix = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+
+cube = Cube()
+cubenum = Cube()
+cubenum.up = matrix
+cubenum.down = matrix
+cubenum.left = matrix
+cubenum.right = matrix
+cubenum.back_left = matrix
+cubenum.back_right = matrix
+cube.print_cube()
+print()
+cubenum.print_cube()
+print()
+
+cubenum.rotate_side_up_counterclockwise()
+cube.rotate_side_up_counterclockwise()
+#cube.rotate_side_up_clockwise()
+#cube.rotate_side_middle_counterclockwise()
+#cube.rotate_side_middle_clockwise()
+#cube.rotate_side_down_counterclockwise()
+#cube.rotate_side_down_clockwise()
+#cube.rotate_side_left_counterclockwise()
+#cube.rotate_side_left_clockwise()
+#cube.rotate_side_middle_right_counterclockwise()
+#cube.rotate_side_middle_right_clockwise()
+#cube.rotate_side_back_right_counterclockwise()
+#cube.rotate_side_back_right_clockwise()
+#cube.rotate_side_right_counterclockwise()
+#cube.rotate_side_right_clockwise()
+#cube.rotate_side_middle_left_counterclockwise()
+#cube.rotate_side_middle_left_clockwise()
+#cube.rotate_side_back_left_counterclockwise()
+#cube.rotate_side_back_left_clockwise()
+#cube.rotate_cube_left_to_right()
+
+cube.print_cube()
+print()
+cubenum.print_cube()
