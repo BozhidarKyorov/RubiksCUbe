@@ -1,8 +1,9 @@
+"""Module with non-specific helping funcitons"""
 import math
 
 """Dimentions"""
-a=250
-b=100
+A=250
+B=100
 
 def randomassformula(angle):
     """Deprecated"""
@@ -11,19 +12,19 @@ def randomassformula(angle):
 def calculate_elipse_cords(angle):
     """Deprecated"""
     if(angle<=math.pi/2):
-        x=calculate_x_ellipse(a,b,angle)
-        y=calculate_y_ellipse(a,b,angle)
+        x=calculate_x_ellipse(A,B,angle)
+        y=calculate_y_ellipse(A,B,angle)
     elif(angle<=math.pi):
-        x=-calculate_x_ellipse(a,b,angle)
-        y=calculate_y_ellipse(a,b,angle)
+        x=-calculate_x_ellipse(A,B,angle)
+        y=calculate_y_ellipse(A,B,angle)
     elif(angle<=math.pi*3/2):
-        x=-calculate_x_ellipse(a,b,angle)
-        y=-calculate_y_ellipse(a,b,angle)
+        x=-calculate_x_ellipse(A,B,angle)
+        y=-calculate_y_ellipse(A,B,angle)
     else:
-        x=calculate_x_ellipse(a,b,angle)
-        y=-calculate_y_ellipse(a,b,angle)
+        x=calculate_x_ellipse(A,B,angle)
+        y=-calculate_y_ellipse(A,B,angle)
     return [x,y]
-    
+
 
 def transpose_matrix(matrix : list):
     """Transposes matrix. Returns the transposed matrix"""
@@ -65,28 +66,20 @@ def print_matrix(matrix:list):
     for row in matrix:
         print(row)
 
+def get_color(letter):
+    """Returns RBG code for each color of the cube faces"""
+    match letter:
+        case 'W': return (240, 240, 240)
+        case 'R': return (230, 0, 0)
+        case 'Y': return (230, 235, 0)
+        case 'G': return (0, 128, 0)
+        case 'B': return (0, 0, 204)
+        case 'O': return (255, 115, 0)
+
 def calculate_x_ellipse(a: int, b:int, angle:float)->float:
-     """Deprecated"""
-     return (a*b)/math.sqrt(b*b+a*a*(math.tan(angle%360)**2))
+    """Deprecated"""
+    return (a*b)/math.sqrt(b*b+a*a*(math.tan(angle%360)**2))
 
 def calculate_y_ellipse(a: int, b:int, angle:float)->float:
-     """Deprecated"""
-     return b*math.sqrt(1-(calculate_x_ellipse(a,b,angle)**2)/(a**2))
-
-def get_color(letter):
-     """Returns RBG code for each color of the cube faces"""
-     match letter:
-          case 'W': return (240, 240, 240)
-          case 'R': return (230, 0, 0)
-          case 'Y': return (230, 235, 0)
-          case 'G': return (0, 128, 0)
-          case 'B': return (0, 0, 204)
-          case 'O': return (255, 115, 0)
-         
-
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-
+    """Deprecated"""
+    return b*math.sqrt(1-(calculate_x_ellipse(A,B,angle)**2)/(a**2))
