@@ -1,7 +1,5 @@
 import pygame
-import math
 import draw_functions
-import rotate_functions
 import cube
 import buttons
 from helpers import *
@@ -38,6 +36,7 @@ rotating = False
 
 
 def starting_screen():
+    """Starting screen event loop"""
     while True:
         screen.blit(background_surface,(0, 0))
         screen.blit(cube_image, (150, 150))
@@ -74,6 +73,7 @@ def starting_screen():
         clock.tick(60)
 
 def main():
+    """Main screen event loop"""
     global shuffled, turns, toggle_tutorial
     while True:
         screen.blit(background_surface, (0, 0))
@@ -169,6 +169,7 @@ def main():
         clock.tick(60)
 
 def left_menu():
+    """Draws the left menu on the main screen and returns the rectangle of each button on it"""
     screen.blit(menu_surface, (0, 0))
 
     screen.blit(pygame.transform.smoothscale(button_image, (250, 100)), (40, 200))
@@ -189,9 +190,11 @@ def left_menu():
     return [back_button, tutorial_button, shuffle_button, close_button]
 
 def right_menu():
+    """Draws the right menu on the main screen and returns the rectangle of each button on it"""
     screen.blit(menu_surface, (1250, 0))
     
 def victory_screen():
+    """Victory screen"""
     while True:
         screen.blit(background_surface,(0, 0))
         left_menu_buttons = left_menu()
@@ -211,90 +214,14 @@ def victory_screen():
                     exit()
                 
        
-        screen.blit(button_font.render('Vicotry', 1, 'black'), (1110, 375))
+        screen.blit(button_font.render('Vicotry', 1, 'black'), (800, 375))
 
         pygame.display.update()
         clock.tick(60)
     
-def test_screen():
-    angle = 0 
-    rotating = False
-    
-    while True:
-        if(angle >= 90):
-            rotating = False
-            angle = 0
-
-        screen.blit(background_surface, (0, 0))
-        screen.blit(button_font.render('TEST', 1, 'black'), (800, 100))
-        
-        left_menu()
-        right_menu()
-
-        test_button = pygame.draw.rect(screen, 'grey', pygame.Rect(400, 300, 100, 50))
-
-        if rotating:
-                rotate_functions.rf_rotate_side_up_clockwise(cube, screen, angle)
-        else:
-            draw_functions.color_cube(screen, cube)
-            draw_functions.draw_cube_edges(screen)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-            
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if test_button.collidepoint(event.pos):
-                    rotating = True
-                    angle = 0
-
-
-        
-
-        #draw_functions.color_cube(screen, cube)
-        #draw_functions.draw_cube_edges(screen)
-
-        
-
-        #if angle == 90:
-        #    angle += 10
-        #else:
-        #   angle += (1 - math.log(abs(90-angle)/90, 1.5))/2
-        angle += 1
-        #print(angle)
-        #print(randomassformula(angle))
-
-
-        #draw_functions.draw_up(screen)
-        #draw_functions.draw_left(screen)
-        #draw_functions.draw_right(screen)
-        #draw_functions.draw_ver(screen)
-        #pygame.draw.ellipse(screen, 'white', (550,200,500,200), 3)
-
-        
-        """if(angle<=math.pi/2):
-            x=calculate_x_ellipse(a,b,angle)
-            y=calculate_y_ellipse(a,b,angle)
-        elif(angle<=math.pi):
-            x=-calculate_x_ellipse(a,b,angle)
-            y=calculate_y_ellipse(a,b,angle)
-        elif(angle<=math.pi*3/2):
-            x=-calculate_x_ellipse(a,b,angle)
-            y=-calculate_y_ellipse(a,b,angle)
-        else:
-            x=calculate_x_ellipse(a,b,angle)
-            y=-calculate_y_ellipse(a,b,angle)
-        pygame.draw.line(screen, 'red', (x+800,y+300),(0,200),3)
-        angle += math.pi/360
-        if(angle>=2*math.pi):
-            angle-=2*math.pi
-        """
-        pygame.display.update()
-        clock.tick(60)
-
     
 def show_tutorial():
+    """Shows tutorial """
     screen.blit(text_bubble, (1172, 435))
     screen.blit(tutorial_font.render('Rotates cube', 1, 'black'), (1232, 452))
 

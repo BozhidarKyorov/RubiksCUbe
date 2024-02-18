@@ -4,6 +4,7 @@ from helpers import a, b
 import math
 from cube import Cube
 
+"""Buttons for side rotation. Contains rectangle for detection, draw fuction, position and respective cube rotation function for each"""
 left_buttons = [[pygame.Rect((550 - 40, 350 - 20), (20, 40)), draw_functions.draw_button_left, (550, 350), Cube.rotate_side_up_clockwise],
                     [pygame.Rect((550 - 40, 450 - 20), (20, 40)), draw_functions.draw_button_left, (550, 450), Cube.rotate_side_middle_clockwise],
                     [pygame.Rect((550 - 40, 550 - 20), (20, 40)), draw_functions.draw_button_left, (550, 550), Cube.rotate_side_down_clockwise]]
@@ -42,13 +43,7 @@ down_right_buttons = [[pygame.Rect((800 + a*(1/6) - (20*a - 20*b)/(math.sqrt(a*a
 
 rotate_side_buttons = left_buttons + right_buttons + up_left_buttons + down_left_buttons + up_right_buttons + down_right_buttons
 
-def draw_buttons(screen):
-    for button in rotate_side_buttons:
-        button[1](screen, button[2])
-
-    for button in rotate_cube_buttons:
-        button[1](screen, button[2])
-
+"""Buttons for cube rotation. Contains rectangle for detection, draw fuction, position and respective cube rotation function for each"""
 rotate_cube_buttons = [[pygame.Rect((550 - 120, 450 - 40), (20, 80)), 
                         draw_functions.draw_rotate_button_left, (550, 450), Cube.rotate_cube_right_to_left],
                        [pygame.Rect((1050 + 100, 450 - 40), (20, 80)), 
@@ -61,3 +56,12 @@ rotate_cube_buttons = [[pygame.Rect((550 - 120, 450 - 40), (20, 80)),
                         draw_functions.draw_rotate_button_up_left, (550 + a*(1/2), 300 - b*(1/2)), Cube.rotate_cube_right_to_up],
                        [pygame.Rect((800 + a*(1/2) - (120*b - 40*a)/(math.sqrt(a*a + b/b)), 200 + b*(1/2) - (120*a)/(math.sqrt(a*a + b/b))), (88, 35)), 
                         draw_functions.draw_rotate_button_up_right, (800 + a*(1/2), 200 + b*(1/2)), Cube.rotate_cube_left_to_up]]
+
+
+def draw_buttons(screen):
+    """Draws all the buttons"""
+    for button in rotate_side_buttons:
+        button[1](screen, button[2])
+
+    for button in rotate_cube_buttons:
+        button[1](screen, button[2])
